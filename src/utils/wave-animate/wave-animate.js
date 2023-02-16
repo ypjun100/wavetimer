@@ -7,7 +7,7 @@ export class WaveAnimateQueue {
                 this.queue.shift().run();
             }
         }
-    }, 100);
+    }, 50);
 
     static enQueue(waveAnimate) {
         waveAnimate.onStarted = () => { this.isAnimating = true; }

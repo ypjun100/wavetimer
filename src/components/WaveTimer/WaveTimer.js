@@ -24,7 +24,7 @@ export default function WaveTimer() {
     const ui = new TimerUIContainer(window.innerWidth, window.innerHeight);
     ui.onTimerStarted = () => {
       wave.startWave();
-      WaveAnimateQueue.enQueue(new WaveAnimate(wave, ui.currentSeconds / ui.initialSeconds, 0.1));
+      WaveAnimateQueue.enQueue(new WaveAnimate(wave, ui.currentSeconds / ui.initialSeconds, 0.15));
     }
     ui.onTimerPaused = () => { wave.stopWave(); }
     ui.onTimerEachSecond = (currentSeconds, initialSeconds) => {

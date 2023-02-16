@@ -5,6 +5,7 @@ export class TimerUIContainer {
         this.container = new Container();
         this.timerMode = 'paused';
         this.initialSeconds = 60;
+        this.numberOfTimes = 0;
         this.currentSeconds = this.initialSeconds;
 
         // default text style
@@ -33,7 +34,7 @@ export class TimerUIContainer {
         this.startTimeText.blendMode = BLEND_MODES.XOR;
 
         // number of times text
-        this.numberOfTimesText = new Text('0 times', Object.assign({}, defaultTextStyle, { align: 'right' }));
+        this.numberOfTimesText = new Text(`${this.numberOfTimes} times`, Object.assign({}, defaultTextStyle, { align: 'right' }));
         this.numberOfTimesText.alpha = 0.9;
         this.numberOfTimesText.anchor.set(1, 1);
         this.numberOfTimesText.position.set(...this.getPosition('right-top', width, height));
@@ -78,6 +79,16 @@ export class TimerUIContainer {
             return [width / 2 + 140, height / 2 + 70]
     }
 
+    rerender() {
+        this.timerText.text = this.secondsToTime(this.currentSeconds);
+        this.numberOfTimesText.text = `${this.numberOfTimes} times`;
+        if(this.timerMode === "paused") {
+            this.startPauseButton.text = "start";
+        } else if(this.timerMode === "started") {
+            this.startPauseButton.text = "pause";
+        }
+    }
+
     resize(width, height) {
         this.timerText.position.set(...this.getPosition('center', width, height));
         this.startTimeText.position.set(...this.getPosition('left-top', width, height));
@@ -91,14 +102,14 @@ export class TimerUIContainer {
     onTimerPaused() {}
     onTimerReset() {
         this.timerMode = "paused";
-        this.startPauseButton.text = "start";
         this.currentSeconds = this.initialSeconds;
-        this.timerText.text = this.secondsToTime(this.currentSeconds);
+        this.rerender();
         this.onTimerPaused();
         clearInterval(this.timer);
     }
     onTimerFinished() {
-        this.timerMode = "paused";
+        this.numberOfTimes++;
+        this.rerender();
     }
 
     secondsToTime(seconds) {
@@ -114,10 +125,9 @@ export class TimerUIContainer {
 
         if(this.currentSeconds <= 0) {
             this.timerMode = "paused";
-            this.startPauseButton.text = "start";
             this.currentSeconds = this.initialSeconds;
-            this.timerText.text = this.secondsToTime(this.currentSeconds);
             this.onTimerPaused();
+            this.onTimerFinished();
             clearInterval(this.timer);
         }
     }
@@ -126,11 +136,11 @@ export class TimerUIContainer {
         if(this.timerMode === "paused") {
             this.timerMode = "started";
             this.timer = setInterval(this.onEachSecond.bind(this), 1000);
-            this.startPauseButton.text = "pause";
+            this.rerender();
             this.onTimerStarted();
         } else {
             this.timerMode = "paused";
-            this.startPauseButton.text = "start";
+            this.rerender();
             this.onTimerPaused();
             clearInterval(this.timer);
         }
