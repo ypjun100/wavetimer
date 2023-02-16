@@ -79,9 +79,9 @@ export class TimerUIContainer {
     }
 
     resize(width, height) {
-        this.mainTimer.position.set(...this.getPosition('center', width, height));
-        this.startTime.position.set(...this.getPosition('left-top', width, height));
-        this.numberOfTimes.position.set(...this.getPosition('right-top', width, height));
+        this.timerText.position.set(...this.getPosition('center', width, height));
+        this.startTimeText.position.set(...this.getPosition('left-top', width, height));
+        this.numberOfTimesText.position.set(...this.getPosition('right-top', width, height));
         this.resetButton.position.set(...this.getPosition('left-bottom', width, height));
         this.startPauseButton.position.set(...this.getPosition('right-bottom', width, height));
     }
@@ -97,6 +97,9 @@ export class TimerUIContainer {
         this.onTimerPaused();
         clearInterval(this.timer);
     }
+    onTimerFinished() {
+        this.timerMode = "paused";
+    }
 
     secondsToTime(seconds) {
         const min = ('0' + parseInt(seconds / 60)).slice(-2);
@@ -109,7 +112,12 @@ export class TimerUIContainer {
         this.timerText.text = this.secondsToTime(this.currentSeconds);
         this.onTimerEachSecond(this.currentSeconds, this.initialSeconds);
 
-        if(this.currentSeconds < 0) {
+        if(this.currentSeconds <= 0) {
+            this.timerMode = "paused";
+            this.startPauseButton.text = "start";
+            this.currentSeconds = this.initialSeconds;
+            this.timerText.text = this.secondsToTime(this.currentSeconds);
+            this.onTimerPaused();
             clearInterval(this.timer);
         }
     }

@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { Application, Graphics } from 'pixi.js';
 
 import { WaveManager } from '../../utils/wave/wave-manager';
-import { Animate } from '../../utils/animate/animate';
 import { TimerUIContainer } from '../../utils/timer-ui/timer-ui';
+import { WaveAnimate, WaveAnimateQueue } from '../../utils/wave-animate/wave-animate';
 
 export default function WaveTimer() {
   useEffect(() => {
@@ -22,9 +22,14 @@ export default function WaveTimer() {
 
     // create ui
     const ui = new TimerUIContainer(window.innerWidth, window.innerHeight);
-    ui.onTimerStarted = () => { wave.startWave(); }
+    ui.onTimerStarted = () => {
+      wave.startWave();
+      WaveAnimateQueue.enQueue(new WaveAnimate(wave, ui.currentSeconds / ui.initialSeconds, 0.1));
+    }
     ui.onTimerPaused = () => { wave.stopWave(); }
-    ui.onTimerEachSecond = (currentSeconds, initialSeconds) => { new Animate((value) => { wave.waveHeight = value; }, wave.waveHeight, currentSeconds / initialSeconds).run(0.4); };
+    ui.onTimerEachSecond = (currentSeconds, initialSeconds) => {
+      WaveAnimateQueue.enQueue(new WaveAnimate(wave, currentSeconds / initialSeconds, 0.7));
+    };
     app.stage.addChild(ui.container);
     
     // create wave graphics
@@ -58,9 +63,6 @@ export default function WaveTimer() {
         wave.stopWave();
       } else if(e.key === "3") {
         wave.switchTheme();
-      } else if(e.key === "4") {
-        const animate = new Animate((value) => { wave.waveHeight = value; }, wave.waveHeight, Math.random() * 0.8 + 0.1);
-        animate.run(0.1);
       }
     };
   }, []);
