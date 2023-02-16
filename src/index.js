@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/index.css';
-import Home from './pages/Home';
+import WaveTimer from './components/WaveTimer/WaveTimer';
+import Home from './pages/Home/Home';
 import reportWebVitals from './_tests_/reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <div className="container">
+    <WaveTimer />
     <Home />
-  </React.StrictMode>
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function
