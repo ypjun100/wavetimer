@@ -5,6 +5,8 @@ import { WaveManager } from '../../utils/wave/wave-manager';
 import { TimerUIContainer } from '../../utils/timer-ui/timer-ui';
 import { WaveAnimate, WaveAnimateQueue } from '../../utils/wave-animate/wave-animate';
 
+import alarm from '../../assets/alarm.wav';
+
 export default function WaveTimer() {
   useEffect(() => {
     const canvas = document.getElementById("wave-timer-canvas");
@@ -18,8 +20,11 @@ export default function WaveTimer() {
       resolution: 2,
       resizeTo: window});
     const graphics = new Graphics();
+    const alarmSound = new Audio(alarm);
+    alarmSound.load();
+
     app.stage.addChild(graphics);
-    
+
     // create ui
     const ui = new TimerUIContainer(window.innerWidth, window.innerHeight);
     ui.onTimerStarted = () => {
@@ -27,9 +32,8 @@ export default function WaveTimer() {
       WaveAnimateQueue.enQueue(new WaveAnimate(wave, ui.currentSeconds / ui.initialSeconds, 0.15));
     }
     ui.onTimerPaused = () => { wave.stopWave(); }
-    ui.onTimerEachSecond = (currentSeconds, initialSeconds) => {
-      WaveAnimateQueue.enQueue(new WaveAnimate(wave, currentSeconds / initialSeconds, 0.7));
-    };
+    ui.onTimerEachSecond = (currentSeconds, initialSeconds) => { WaveAnimateQueue.enQueue(new WaveAnimate(wave, currentSeconds / initialSeconds, 0.7)); };
+    ui.onTimerFinished = () => { alarmSound.play(); WaveAnimateQueue.enQueue(new WaveAnimate(wave, 1.0, 0.15)); }
     app.stage.addChild(ui.container);
     
     // create wave graphics

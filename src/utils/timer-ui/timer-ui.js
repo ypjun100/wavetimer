@@ -4,7 +4,7 @@ export class TimerUIContainer {
     constructor(width, height) {
         this.container = new Container();
         this.timerMode = 'paused';
-        this.initialSeconds = 60;
+        this.initialSeconds = 10;
         this.numberOfTimes = 0;
         this.currentSeconds = this.initialSeconds;
 
@@ -136,6 +136,7 @@ export class TimerUIContainer {
         if(this.currentSeconds <= 0) {
             this.numberOfTimes++;
             this.timerReset();
+            this.onTimerFinished();
         }
     }
 
@@ -144,4 +145,5 @@ export class TimerUIContainer {
     onTimerStarted() {}
     onTimerPaused() {}
     onTimerReset() {}
+    onTimerFinished() {}
 }
