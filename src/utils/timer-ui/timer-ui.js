@@ -47,7 +47,7 @@ export class TimerUIContainer {
         this.resetButton.blendMode = BLEND_MODES.XOR;
         this.resetButton.interactive = true;
         this.resetButton.cursor = 'pointer';
-        this.resetButton.on('pointerdown', this.onTimerReset.bind(this));
+        this.resetButton.on('pointerdown', this.timerReset.bind(this));
 
         // start/pause button
         this.startPauseButton = new Text('start', Object.assign({}, defaultTextStyle, { align: 'right' }));
@@ -56,7 +56,7 @@ export class TimerUIContainer {
         this.startPauseButton.blendMode = BLEND_MODES.XOR;
         this.startPauseButton.interactive = true;
         this.startPauseButton.cursor = 'pointer';
-        this.startPauseButton.on('pointerdown', this.onTimerStartPause.bind(this));
+        this.startPauseButton.on('pointerdown', this.timerStartPause.bind(this));
 
         this.container.addChild(this.timerText, this.startTimeText, this.numberOfTimesText, this.resetButton, this.startPauseButton);
 
@@ -89,6 +89,12 @@ export class TimerUIContainer {
         }
     }
 
+    secondsToTime(seconds) {
+        const min = ('0' + parseInt(seconds / 60)).slice(-2);
+        const sec = ('0' + seconds % 60).slice(-2);
+        return `${min}:${sec}`
+    }
+
     resize(width, height) {
         this.timerText.position.set(...this.getPosition('center', width, height));
         this.startTimeText.position.set(...this.getPosition('left-top', width, height));
@@ -97,52 +103,45 @@ export class TimerUIContainer {
         this.startPauseButton.position.set(...this.getPosition('right-bottom', width, height));
     }
 
-    onTimerEachSecond(currentSeconds, initialSeconds) {}
-    onTimerStarted() {}
-    onTimerPaused() {}
-    onTimerReset() {
+    // timer event
+    timerStartPause() {
+        if(this.timerMode === "paused") {
+            this.timerStart();
+        } else {
+            this.timerPause();
+        }
+    }
+    timerStart() {
+        this.timerMode = "started";
+        this.timer = setInterval(this.timerEachSecond.bind(this), 1000);
+        this.rerender();
+        this.onTimerStarted();
+    }
+    timerPause() {
         this.timerMode = "paused";
-        this.currentSeconds = this.initialSeconds;
         this.rerender();
         this.onTimerPaused();
         clearInterval(this.timer);
     }
-    onTimerFinished() {
-        this.numberOfTimes++;
-        this.rerender();
+    timerReset() {
+        this.currentSeconds = this.initialSeconds;
+        this.timerPause();
+        clearInterval(this.timer);
     }
-
-    secondsToTime(seconds) {
-        const min = ('0' + parseInt(seconds / 60)).slice(-2);
-        const sec = ('0' + seconds % 60).slice(-2);
-        return `${min}:${sec}`
-    }
-
-    onEachSecond() {
+    timerEachSecond() {
         this.currentSeconds -= 1;
         this.timerText.text = this.secondsToTime(this.currentSeconds);
         this.onTimerEachSecond(this.currentSeconds, this.initialSeconds);
 
         if(this.currentSeconds <= 0) {
-            this.timerMode = "paused";
-            this.currentSeconds = this.initialSeconds;
-            this.onTimerPaused();
-            this.onTimerFinished();
-            clearInterval(this.timer);
+            this.numberOfTimes++;
+            this.timerReset();
         }
     }
 
-    onTimerStartPause() {
-        if(this.timerMode === "paused") {
-            this.timerMode = "started";
-            this.timer = setInterval(this.onEachSecond.bind(this), 1000);
-            this.rerender();
-            this.onTimerStarted();
-        } else {
-            this.timerMode = "paused";
-            this.rerender();
-            this.onTimerPaused();
-            clearInterval(this.timer);
-        }
-    }
+    // user custom event
+    onTimerEachSecond(currentSeconds, initialSeconds) {}
+    onTimerStarted() {}
+    onTimerPaused() {}
+    onTimerReset() {}
 }

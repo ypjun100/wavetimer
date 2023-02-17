@@ -9,14 +9,14 @@ export class WaveManager {
         this.document = document;
         this.canvas = canvas;
         this.graphics = graphics;
-        this.frame = 0;
-        this.lastFrame = 0;
+        this.waveHeight = 0.5; // range 0 ~ 1
         this.isMouseActive = true;
         this.mousePosX = 0;
         this.mouseDownTime = 0;
         this.backWave = new Wave(120, this.width, 10);
         this.frontWave = new Wave(100, this.width, 15);
-        this.waveHeight = 0.5; // range 0 ~ 1
+        this.frame = 0;
+        this.lastFrame = 0;
 
         // create background & gradation
         this.background = this.document.createElement('div');

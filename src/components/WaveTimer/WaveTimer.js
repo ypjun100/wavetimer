@@ -19,7 +19,7 @@ export default function WaveTimer() {
       resizeTo: window});
     const graphics = new Graphics();
     app.stage.addChild(graphics);
-
+    
     // create ui
     const ui = new TimerUIContainer(window.innerWidth, window.innerHeight);
     ui.onTimerStarted = () => {
@@ -33,7 +33,7 @@ export default function WaveTimer() {
     app.stage.addChild(ui.container);
     
     // create wave graphics
-    const wave = new WaveManager("light", window.innerWidth, window.innerHeight, document, canvas, graphics);
+    const wave = new WaveManager("dark", window.innerWidth, window.innerHeight, document, canvas, graphics);
     wave.registerFpsText(ui.fps);
 
     // render
@@ -54,6 +54,9 @@ export default function WaveTimer() {
     window.ontouchstart = (e) => {
       wave.mouseDown(e.touches[0].clientX);
     };
+    document.onvisibilitychange = () => {
+      WaveAnimateQueue.userFocus = document.visibilityState === "visible" ? true : false;
+    }
 
     // for testing
     window.onkeydown = (e) => {

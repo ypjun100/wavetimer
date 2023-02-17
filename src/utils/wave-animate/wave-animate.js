@@ -1,13 +1,19 @@
 export class WaveAnimateQueue {
     static queue = [];
-    static isAnimating = false;
+    static isAnimating = false; // guartee priority
+    static userFocus = true; // check user focus
     static mainInterval = setInterval(() => {
         if(this.queue.length) {
             if(!this.isAnimating) {
-                this.queue.shift().run();
+                this.current = this.queue.shift();
+                this.current.run();
             }
+            if (!this.userFocus) {
+                this.current.finish();
+            }
+            // console.log(this.queue);
         }
-    }, 50);
+    }, 100);
 
     static enQueue(waveAnimate) {
         waveAnimate.onStarted = () => { this.isAnimating = true; }
@@ -27,8 +33,7 @@ export class WaveAnimate {
 
     run() {
         this.onStarted();
-
-        const animator = setInterval(() => {
+        this.animator = setInterval(() => {
             if(!this.isStarted) {
                 this.isStarted = true;
                 this.startValue = this.wave.waveHeight;
@@ -36,10 +41,9 @@ export class WaveAnimate {
                     return 1/(1+(0.01*value/(1-0.01*value))**-2)*(this.endValue-this.startValue)+this.startValue
                 }
             }
-
             this.wave.waveHeight = this.func(this.counter);
             if(this.counter >= 100.0) {
-                clearInterval(animator);
+                clearInterval(this.animator);
                 this.onFinished();
             }
             this.counter += this.alpha;
@@ -48,4 +52,10 @@ export class WaveAnimate {
 
     onStarted() {}
     onFinished() {}
+    finish() {
+        this.onStarted();
+        this.wave.waveHeight = this.endValue;
+        clearInterval(this.animator);
+        this.onFinished();
+    }
 }
