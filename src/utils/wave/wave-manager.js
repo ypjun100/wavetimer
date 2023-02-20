@@ -13,8 +13,8 @@ export class WaveManager {
         this.isMouseActive = true;
         this.mousePosX = 0;
         this.mouseDownTime = 0;
-        this.backWave = new Wave(120, this.width, 10);
-        this.frontWave = new Wave(100, this.width, 15);
+        this.backWave = new Wave(parseInt((this.width >= 1280 ? 1280 : this.width) * 0.06 + 25), this.width, 10); // original value : 120
+        this.frontWave = new Wave(parseInt((this.width >= 1280 ? 1280 : this.width) * 0.06 + 45), this.width, 15); // original value : 100
         this.frame = 0;
         this.lastFrame = 0;
 
