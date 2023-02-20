@@ -2,16 +2,15 @@ export class WaveAnimateQueue {
     static queue = [];
     static isAnimating = false; // guartee priority
     static userFocus = true; // check user focus
-    static mainInterval = setInterval(() => {
+    static mainInterval = setInterval(() => { // animation queue pop element every 0.1s constantly.
         if(this.queue.length) {
             if(!this.isAnimating) {
                 this.current = this.queue.shift();
                 this.current.run();
             }
-            if (!this.userFocus) {
+            if (!this.userFocus) { // if user's focus is not on this app, each animation finish immidiately.
                 this.current.finish();
             }
-            // console.log(this.queue);
         }
     }, 100);
 

@@ -5,8 +5,6 @@ import { WaveManager } from '../../utils/wave/wave-manager';
 import { TimerUIContainer } from '../../utils/timer-ui/timer-ui';
 import { WaveAnimate, WaveAnimateQueue } from '../../utils/wave-animate/wave-animate';
 
-import alarm from '../../assets/alarm.wav';
-
 export default function WaveTimer() {
   useEffect(() => {
     const canvas = document.getElementById("wave-timer-canvas");
@@ -20,9 +18,6 @@ export default function WaveTimer() {
       resolution: 2,
       resizeTo: window});
     const graphics = new Graphics();
-    const alarmSound = new Audio(alarm);
-    alarmSound.load();
-
     app.stage.addChild(graphics);
 
     // create ui
@@ -33,7 +28,7 @@ export default function WaveTimer() {
     }
     ui.onTimerPaused = () => { wave.stopWave(); }
     ui.onTimerEachSecond = (currentSeconds, initialSeconds) => { WaveAnimateQueue.enQueue(new WaveAnimate(wave, currentSeconds / initialSeconds, 0.7)); };
-    ui.onTimerFinished = () => { alarmSound.play(); WaveAnimateQueue.enQueue(new WaveAnimate(wave, 1.0, 0.15)); }
+    ui.onTimerFinished = () => { WaveAnimateQueue.enQueue(new WaveAnimate(wave, 1.0, 0.15)); }
     app.stage.addChild(ui.container);
     
     // create wave graphics
@@ -58,6 +53,7 @@ export default function WaveTimer() {
     window.ontouchstart = (e) => {
       wave.mouseDown(e.touches[0].clientX);
     };
+    // render is not execute functually when user focus was lost. 
     document.onvisibilitychange = () => {
       WaveAnimateQueue.userFocus = document.visibilityState === "visible" ? true : false;
     }

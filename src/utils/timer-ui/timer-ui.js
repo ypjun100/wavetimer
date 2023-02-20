@@ -7,6 +7,8 @@ export class TimerUIContainer {
         this.initialSeconds = 10;
         this.numberOfTimes = 0;
         this.currentSeconds = this.initialSeconds;
+        this.alarmSound = new Audio();
+        this.alarmSound.autoplay = true;
 
         // default text style
         const defaultTextStyle = {
@@ -105,6 +107,9 @@ export class TimerUIContainer {
 
     // timer event
     timerStartPause() {
+        // safari has a constraint that audio must be played by user not automatically. below code is little trick to solve this matter.
+        this.alarmSound.src = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+        this.alarmSound.play();
         if(this.timerMode === "paused") {
             this.timerStart();
         } else {
@@ -135,6 +140,8 @@ export class TimerUIContainer {
 
         if(this.currentSeconds <= 0) {
             this.numberOfTimes++;
+            this.alarmSound.src = '/alarm.wav';
+            this.alarmSound.play();
             this.timerReset();
             this.onTimerFinished();
         }
