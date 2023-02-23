@@ -71,8 +71,6 @@ export default function WaveTimer() {
   }, []);
 
   return (
-    <div className="wave-timer">
-      <canvas id="wave-timer-canvas"></canvas>
-    </div>
+    <canvas id="wave-timer-canvas"></canvas>
   );
 }

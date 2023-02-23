@@ -65,7 +65,7 @@ export class TimerUIContainer {
         // fps
         this.fps = new Text("fps : 00");
         this.fps.position.set(0, 0);
-        this.container.addChild(this.fps);
+        // this.container.addChild(this.fps);
     }
 
     getPosition(position, width, height) {

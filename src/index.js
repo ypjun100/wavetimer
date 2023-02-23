@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/index.css';
 import WaveTimer from './components/WaveTimer/WaveTimer';
-import Home from './pages/Home/Home';
+import Index from './pages/Index/Index';
 import reportWebVitals from './_tests_/reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <div className="container">
+    <Index />
     <WaveTimer />
-    <Home />
   </div>
 );
 

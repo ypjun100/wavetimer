@@ -23,8 +23,8 @@ export class WaveManager {
         this.background.style.cssText = `background-color: #212121; opacity: ${this.theme === "light" ? "0" : "1"}; position: absolute; inset: 0px; z-index: -1;`;
         this.gradation = this.document.createElement('div');
         this.gradation.style.cssText = `background: linear-gradient(0deg, ${this.theme === "light" ? "#64A2EA" : "#224773"}, transparent); position: absolute; z-index: 1; pointer-events: none;`;
-        this.document.body.appendChild(this.background);
-        this.document.body.appendChild(this.gradation);
+        this.document.getElementsByClassName("container")[0].appendChild(this.background);
+        this.document.getElementsByClassName("container")[0].appendChild(this.gradation);
     }
 
     switchTheme() {

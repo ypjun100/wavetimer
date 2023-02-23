@@ -11,6 +11,7 @@ export class WaveAnimateQueue {
             if (!this.userFocus) { // if user's focus is not on this app, each animation finish immidiately.
                 this.current.finish();
             }
+            // console.log(this.queue);
         }
     }, 100);
 
@@ -49,12 +50,13 @@ export class WaveAnimate {
         }, 1);
     }
 
-    onStarted() {}
-    onFinished() {}
     finish() {
         this.onStarted();
         this.wave.waveHeight = this.endValue;
         clearInterval(this.animator);
         this.onFinished();
     }
+
+    onStarted() {}
+    onFinished() {}
 }
