@@ -1,4 +1,5 @@
 import { Text, BLEND_MODES, Container } from 'pixi.js';
+import alarm from '../../assets/alarm.mp3';
 
 export class TimerUIContainer {
     constructor(width, height) {
@@ -140,7 +141,7 @@ export class TimerUIContainer {
 
         if(this.currentSeconds <= 0) {
             this.numberOfTimes++;
-            this.alarmSound.src = '/alarm.wav';
+            this.alarmSound.src = alarm;
             this.alarmSound.play();
             this.timerReset();
             this.onTimerFinished();

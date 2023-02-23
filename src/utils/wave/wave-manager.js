@@ -27,6 +27,16 @@ export class WaveManager {
         this.document.getElementsByClassName("container")[0].appendChild(this.gradation);
     }
 
+    setLightTheme() {
+        this.background.style.opacity = 0;
+        this.gradation.style.background = "linear-gradient(0deg, #64A2EA, transparent)"
+    }
+
+    setDarkTheme() {
+        this.background.style.opacity = 1;
+        this.gradation.style.background = "linear-gradient(0deg, #224773, transparent)"
+    }
+
     switchTheme() {
         if(this.theme === "light") {
             this.background.style.opacity = 1;
@@ -91,7 +101,7 @@ export class WaveManager {
     render() {
         // user mouse interaction
         if(!this.isMouseActive) {
-            if(this.mouseDownTime == 0)
+            if(this.mouseDownTime === 0)
                 this.mouseDownTime = this.frame;
 
             const sinPos = Math.sin((this.frame - this.mouseDownTime) * 0.2) * -5;

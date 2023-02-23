@@ -1,11 +1,18 @@
-import { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Application, Graphics } from 'pixi.js';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { switchTheme } from '../../slices/themeSlice';
 import { WaveManager } from '../../utils/wave/wave-manager';
 import { TimerUIContainer } from '../../utils/timer-ui/timer-ui';
 import { WaveAnimate, WaveAnimateQueue } from '../../utils/wave-animate/wave-animate';
 
 export default function WaveTimer() {
+  const theme = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
+  const _wave = useRef(null);
+
+  // didMount
   useEffect(() => {
     const canvas = document.getElementById("wave-timer-canvas");
     const app = new Application({
@@ -32,7 +39,8 @@ export default function WaveTimer() {
     app.stage.addChild(ui.container);
     
     // create wave graphics
-    const wave = new WaveManager("dark", window.innerWidth, window.innerHeight, document, canvas, graphics);
+    const wave = new WaveManager(theme, window.innerWidth, window.innerHeight, document, canvas, graphics);
+    _wave.current = wave;
     wave.registerFpsText(ui.fps);
 
     // render
@@ -65,12 +73,20 @@ export default function WaveTimer() {
       } else if(e.key === "2") {
         wave.stopWave();
       } else if(e.key === "3") {
-        wave.switchTheme();
+        dispatch(switchTheme());
       }
     };
   }, []);
 
+  // when theme state changed
+  useEffect(() => {
+    if(theme === 'light')
+      _wave.current.setLightTheme();
+    else
+      _wave.current.setDarkTheme();
+  }, [theme]);
+
   return (
-    <canvas id="wave-timer-canvas"></canvas>
+    <canvas id="wave-timer-canvas" style={{position: 'absolute'}}></canvas>
   );
 }

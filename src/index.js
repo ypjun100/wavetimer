@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+
+import store from './store';
 import './assets/index.css';
 import WaveTimer from './components/WaveTimer/WaveTimer';
 import Index from './pages/Index/Index';
@@ -7,10 +10,12 @@ import reportWebVitals from './_tests_/reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <div className="container">
-    <Index />
-    <WaveTimer />
-  </div>
+  <Provider store={store}>
+    <div className="container">
+      <Index />
+      <WaveTimer />
+    </div>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

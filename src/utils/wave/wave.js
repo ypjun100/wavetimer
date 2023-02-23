@@ -16,7 +16,7 @@ export class Wave {
 
     startWave(frame) {
         this.isWave = true;
-        if(this.waveStartTime == 0)
+        if(this.waveStartTime === 0)
             this.waveStartTime = frame;
             
     }
