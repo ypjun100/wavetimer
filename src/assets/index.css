@@ -1,5 +1,18 @@
+@font-face {
+  font-family: 'JostN';
+  src: url('./jost-m.woff2') format('woff2'),
+  url('./jost-m.woff2') format('woff'),
+  url('./jost-m.otf') format('opentype');
+}
+@font-face {
+  font-family: 'JostB';
+  src: url('./jost-eb.woff2') format('woff2'),
+  url('./jost-eb.woff2') format('woff'),
+  url('./jost-eb.otf') format('opentype');
+}
+
 body {
-  margin: 0;
+  margin: 0; padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
