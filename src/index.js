@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import store from './store';
-import './assets/index.css';
+import './assets/css/index.css';
 import WaveTimer from './components/WaveTimer/WaveTimer';
 import Index from './pages/Index/Index';
 import reportWebVitals from './_tests_/reportWebVitals';
@@ -12,8 +12,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <div className="container">
-      <Index />
       <WaveTimer />
+      <Index />
     </div>
   </Provider>
 );

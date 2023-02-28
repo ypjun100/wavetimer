@@ -39,7 +39,7 @@ export default function WaveTimer() {
     app.stage.addChild(ui.container);
     
     // create wave graphics
-    const wave = new WaveManager(theme, window.innerWidth, window.innerHeight, document, canvas, graphics);
+    const wave = new WaveManager(theme, window.innerWidth, window.innerHeight, document, canvas, graphics, "wave-timer-canvas");
     _wave.current = wave;
     wave.registerFpsText(ui.fps);
 

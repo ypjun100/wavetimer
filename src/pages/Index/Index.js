@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setDarkTheme } from "../../slices/themeSlice";
+import './index.css';
 
 export default function Index() {
     const theme = useSelector((state) => state.theme);
@@ -19,7 +20,15 @@ export default function Index() {
 
     return (
         <div className="index">
-            
+            <div className="header">
+                <div className="logo" title="wavetimer">
+                    <img src={require('../../assets/images/logo.png')} />
+                    <h2>wavetimer</h2>
+                </div>
+                <div className="right-header">
+                    Right header
+                </div>
+            </div>
         </div>
     )
 }

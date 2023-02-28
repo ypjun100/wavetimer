@@ -1,7 +1,7 @@
 import { Text, BLEND_MODES, Container } from 'pixi.js';
 import FontFaceObserver from 'fontfaceobserver';
 
-import alarm from '../../assets/alarm.mp3';
+import alarm from '../../assets/sounds/alarm.mp3';
 
 export class TimerUIContainer {
     constructor(width, height) {

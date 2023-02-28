@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'JostN';
+  src: url('../fonts/jost-m.woff2') format('woff2'),
+  url('../fonts/jost-m.woff2') format('woff'),
+  url('../fonts/jost-m.otf') format('opentype');
+}
+@font-face {
+  font-family: 'JostB';
+  src: url('../fonts/jost-eb.woff2') format('woff2'),
+  url('../fonts/jost-eb.woff2') format('woff'),
+  url('../fonts/jost-eb.otf') format('opentype');
+}
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../fonts/NotoSansM.woff2') format('woff2'),
+  url('../fonts/NotoSansM.woff2') format('woff'),
+  url('../fonts/NotoSansM.otf') format('opentype');
+}
+
+body {
+  margin: 0; padding: 0;
+  font-family: 'NotoSans';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
