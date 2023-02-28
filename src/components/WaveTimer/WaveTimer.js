@@ -87,6 +87,6 @@ export default function WaveTimer() {
   }, [theme]);
 
   return (
-    <canvas id="wave-timer-canvas" style={{position: 'absolute'}}></canvas>
+    <canvas id="wave-timer-canvas" style={{position: 'absolute', zIndex: '-1'}}></canvas>
   );
 }

@@ -20,9 +20,9 @@ export class WaveManager {
 
         // create background & gradation
         this.background = this.document.createElement('div');
-        this.background.style.cssText = `background-color: #212121; opacity: ${this.theme === "light" ? "0" : "1"}; position: absolute; inset: 0px; z-index: -1;`;
+        this.background.style.cssText = `background-color: #212121; opacity: ${this.theme === "light" ? "0" : "1"}; position: absolute; inset: 0px; z-index: -2;`;
         this.gradation = this.document.createElement('div');
-        this.gradation.style.cssText = `background: linear-gradient(0deg, ${this.theme === "light" ? "#64A2EA" : "#224773"}, transparent); position: absolute; z-index: 1; pointer-events: none;`;
+        this.gradation.style.cssText = `background: linear-gradient(0deg, ${this.theme === "light" ? "#64A2EA" : "#224773"}, transparent); position: absolute; z-index: 0; pointer-events: none;`;
         this.document.getElementById(id).after(this.background);
         this.document.getElementById(id).after(this.gradation);
     }
