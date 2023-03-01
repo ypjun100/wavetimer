@@ -1,4 +1,18 @@
-.header { padding: 25px 35px; display: flex; justify-content: space-between; }
-.logo { cursor: pointer; width: 124px; display: flex; justify-content: space-between; }
-.logo > img { width: 20px; height: 26px; }
-.logo > h2 { font-family: 'JostN'; color: #65A3EB; font-weight: normal; margin: 0; margin-top: -4px; margin-left: 10px; }
+.header { height: 30px; padding: 25px 35px; display: flex; justify-content: space-between; }
+.logo { cursor: pointer; }
+.logo > * { display: inline-block; }
+.logo > img { width: 20px; }
+.logo > h2 { font-family: 'JostN'; color: #65A3EB; font-size: 17pt; font-weight: normal; margin: 0; margin-left: 10px; vertical-align: super; line-height: 30px; }
+.menu > * { display: inline-block; height: 30px; }
+
+button { font-family: 'NotoSans'; border: none; outline: none; cursor: pointer; border-radius: 5px; transition: 0.15s; }
+button.light-gray { color: #7B7B7B; background-color: rgba(0, 0, 0, 0.05); }
+button.light-gray:hover { background-color: rgba(0, 0, 0, 0.07); }
+button.dark-gray { color: #DEDEDE; background-color: rgba(255, 255, 255, 0.06); }
+button.dark-gray:hover { background-color: rgba(255, 255, 255, 0.08); }
+button.blue { color: #65A3EB; background-color: rgba(39, 138, 255, 0.13); }
+button.blue:hover { background-color: rgba(39, 138, 255, 0.16); }
+button.icon { background-color: transparent; vertical-align: middle; height: 20px; padding: 0; margin-right: 15px; opacity: 0.25; }
+button.icon:hover { opacity: 0.4; }
+button.icon > img { height: inherit; }
+.button-header { padding: 0 12px; margin-left: 5px; }

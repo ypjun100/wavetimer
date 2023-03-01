@@ -25,8 +25,11 @@ export default function Index() {
                     <img src={require('../../assets/images/logo.png')} />
                     <h2>wavetimer</h2>
                 </div>
-                <div className="right-header">
-                    Right header
+                <div className="menu">
+                    <button className="icon button-header"><img src={require(`../../assets/images/theme-${theme}.png`)}/></button>
+                    <button className="icon button-header"><img src={require(`../../assets/images/settings-${theme}.png`)}/></button>
+                    <button className={"button-header " + theme + "-gray"}>Feedback</button>
+                    <button className="button-header blue">Sign In</button>
                 </div>
             </div>
         </div>
