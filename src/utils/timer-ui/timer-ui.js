@@ -7,7 +7,7 @@ export class TimerUIContainer {
     constructor(width, height) {
         this.container = new Container();
         this.timerMode = 'paused';
-        this.initialSeconds = 10;
+        this.initialSeconds = 3600;
         this.numberOfTimes = 0;
         this.currentSeconds = this.initialSeconds;
         this.alarmSound = new Audio();

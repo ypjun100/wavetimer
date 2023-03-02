@@ -5,7 +5,7 @@
 .logo > h2 { font-family: 'JostN'; color: #65A3EB; font-size: 17pt; font-weight: normal; margin: 0; margin-left: 10px; vertical-align: super; line-height: 30px; }
 .menu > * { display: inline-block; height: 30px; }
 
-button { font-family: 'NotoSans'; border: none; outline: none; cursor: pointer; border-radius: 5px; transition: 0.15s; }
+button { font-family: 'NotoSans'; border: none; outline: none; cursor: pointer; border-radius: 5px; }
 button.light-gray { color: #7B7B7B; background-color: rgba(0, 0, 0, 0.05); }
 button.light-gray:hover { background-color: rgba(0, 0, 0, 0.07); }
 button.dark-gray { color: #DEDEDE; background-color: rgba(255, 255, 255, 0.06); }
