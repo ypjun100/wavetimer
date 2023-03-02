@@ -1,0 +1,16 @@
+input, textarea { border: 1px solid #DCDCDC; color: #777777; font-size: 11pt; border-radius: 5px; padding: 10px; font-family: 'NotoSans'; width: calc(100% - 20px); outline: none; resize: none; }
+input:focus, textarea:focus { border-color: #65A3EB; }
+input::placeholder, textarea::placeholder { color: #BABABA; }
+
+.overlay-card { background-color: rgba(0, 0, 0, 0.1); position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+.card { background-color: white; padding: 20px 15px; border-radius: 5px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.card-header { display: flex; }
+.card-header > img { width: 35px; padding: 0 15px; }
+.card-title { font-size: 11pt; color: #8A8A8A; text-align: center; }
+.card-send { display: flex; justify-content: space-between; height: 30px; }
+.feedback-process {  }
+
+.card-header-line { width: 170px; height: 1px; background-color: #C9C9C9; margin-top: 10px; }
+
+.spacer-5 { height: 5px; }
+.spacer-20 { height: 20px; }
