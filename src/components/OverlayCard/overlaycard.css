@@ -1,14 +1,21 @@
-input, textarea { border: 1px solid #DCDCDC; color: #777777; font-size: 11pt; border-radius: 5px; padding: 10px; font-family: 'NotoSans'; width: calc(100% - 20px); outline: none; resize: none; }
+input, textarea { border: 1px solid #DCDCDC; color: #777777; font-size: 10pt; border-radius: 5px; padding: 10px; font-family: 'NotoSans'; width: calc(100% - 20px); outline: none; resize: none; }
 input:focus, textarea:focus { border-color: #65A3EB; }
 input::placeholder, textarea::placeholder { color: #BABABA; }
+textarea { vertical-align: top; }
 
 .overlay-card { background-color: rgba(0, 0, 0, 0.1); position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
 .card { background-color: white; padding: 20px 15px; border-radius: 5px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 .card-header { display: flex; }
 .card-header > img { width: 35px; padding: 0 15px; }
 .card-title { font-size: 11pt; color: #8A8A8A; text-align: center; }
-.card-send { display: flex; justify-content: space-between; height: 30px; }
-.feedback-process {  }
+.card-send { display: flex; justify-content: space-between; height: 35px; }
+.feedback-process > * { display: inline-block; cursor: pointer; }
+.feedback-process > img { width: 15px; height: 15px; vertical-align: sub; }
+.feedback-process > p { margin: 0; color: #BFBFBF; padding-left: 5px; font-size: 10pt; vertical-align: text-bottom; }
+.button-send { cursor: pointer; background-color: #E3F0FF; border-radius: 5px; padding: 0 15px; }
+.button-send > * { display: inline-block; cursor: pointer; }
+.button-send > img { width: 14px; vertical-align: text-bottom; }
+.button-send > p { font-size: 11pt; color: #65A3EB; margin: 0; margin-left: 8px; vertical-align: sub; }
 
 .card-header-line { width: 170px; height: 1px; background-color: #C9C9C9; margin-top: 10px; }
 

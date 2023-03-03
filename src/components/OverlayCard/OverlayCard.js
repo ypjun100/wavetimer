@@ -27,7 +27,12 @@ export default function OverlayCard(props) {
                 <div className='spacer-20'></div>
                 <div className='card-send'>
                     <div className='feedback-process'>
-                        
+                        <img src={require('../../assets/images/questionmark.png')} />
+                        <p>Feedback process</p>
+                    </div>
+                    <div className='button-send'>
+                        <img src={require('../../assets/images/paperplane.png')} />
+                        <p>Send</p>
                     </div>
                 </div>
             </div>
