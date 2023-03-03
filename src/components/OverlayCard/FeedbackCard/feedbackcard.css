@@ -1,0 +1,8 @@
+.card-send { display: flex; justify-content: space-between; height: 35px; }
+.feedback-process > * { display: inline-block; cursor: pointer; }
+.feedback-process > img { width: 15px; height: 15px; vertical-align: sub; }
+.feedback-process > p { margin: 0; color: #BFBFBF; padding-left: 5px; font-size: 10pt; vertical-align: text-bottom; }
+.button-send { cursor: pointer; background-color: #E3F0FF; border-radius: 5px; padding: 0 15px; }
+.button-send > * { display: inline-block; }
+.button-send > img { width: 12px; vertical-align: text-bottom; }
+.button-send > p { font-size: 11pt; color: #65A3EB; margin: 0; margin-left: 8px; vertical-align: sub; }

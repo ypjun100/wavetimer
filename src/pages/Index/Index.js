@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import OverlayCard from "../../components/OverlayCard/OverlayCard";
+import './index.css';
 
 import { setDarkTheme } from "../../slices/themeSlice";
-import './index.css';
+import OverlayCard from "../../components/OverlayCard/OverlayCard";
 
 export default function Index() {
     const theme = useSelector((state) => state.theme);
+    const [overlayContent, setOverlayContent] = useState('SomethingIsWrongCard');
     const [overlayVisible, setOverlayVisible] = useState(false);
     const dispatch = useDispatch();
 
@@ -17,11 +18,13 @@ export default function Index() {
     }, []);
 
     // when theme value changed
-    useEffect(() => {
-        console.log('change received');
-    }, [theme]);
+    // useEffect(() => {
+    //     console.log('change received');
+    // }, [theme]);
 
+    // show feedback overlay
     function showFeedback() {
+        setOverlayContent('FeedbackCard');
         setOverlayVisible(true);
     }
 
@@ -29,17 +32,17 @@ export default function Index() {
         <div className="index">
             <div className="header">
                 <div className="logo" title="wavetimer">
-                    <img src={require('../../assets/images/logo.png')} />
+                    <img src={require('../../assets/images/logo.png')} alt="logo"/>
                     <h2>wavetimer</h2>
                 </div>
                 <div className="menu">
-                    <button className="icon button-header"><img src={require(`../../assets/images/theme-${theme}.png`)}/></button>
-                    <button className="icon button-header"><img src={require(`../../assets/images/settings-${theme}.png`)}/></button>
+                    <button className="icon button-header"><img src={require(`../../assets/images/theme-${theme}.png`)} alt="switch theme"/></button>
+                    <button className="icon button-header"><img src={require(`../../assets/images/settings-${theme}.png`)} alt="settings"/></button>
                     <button className={"button-header " + theme + "-gray"} onClick={showFeedback}>Feedback</button>
                     <button className="button-header blue">Sign In</button>
                 </div>
             </div>
-            <OverlayCard visible={overlayVisible} setVisible={setOverlayVisible}/>
+            <OverlayCard visible={overlayVisible} setVisible={setOverlayVisible} content={overlayContent}/>
         </div>
     )
 }
