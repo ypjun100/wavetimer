@@ -67,15 +67,15 @@ export default function WaveTimer() {
     }
 
     // for testing
-    window.onkeydown = (e) => {
-      if(e.key === "1") {
-        wave.startWave();
-      } else if(e.key === "2") {
-        wave.stopWave();
-      } else if(e.key === "3") {
-        dispatch(switchTheme());
-      }
-    };
+    // window.onkeydown = (e) => {
+    //   if(e.key === "1") {
+    //     wave.startWave();
+    //   } else if(e.key === "2") {
+    //     wave.stopWave();
+    //   } else if(e.key === "3") {
+    //     dispatch(switchTheme());
+    //   }
+    // };
   }, []);
 
   // when theme state changed

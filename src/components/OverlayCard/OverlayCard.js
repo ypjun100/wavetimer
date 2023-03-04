@@ -4,6 +4,7 @@ import './overlaycard.css';
 import FeedbackCard from './FeedbackCard/FeedbackCard';
 import SomethingIsWrongCard from './SomethingIsWrongCard/SomethingIsWrongCard';
 import SignInCard from './SignInCard/SignInCard';
+import SignUpCard from './SignUpCard/SignUpCard';
 
 export default function OverlayCard(props) {
     useEffect(() => {
@@ -21,7 +22,9 @@ export default function OverlayCard(props) {
                         if(props.content === "FeedbackCard") {
                             return (<FeedbackCard />);
                         } else if(props.content === "SignInCard") {
-                            return (<SignInCard />);
+                            return (<SignInCard setContent={props.setContent}/>);
+                        } else if(props.content === "SignUpCard") {
+                            return (<SignUpCard setContent={props.setContent}/>)
                         }
                         return (<SomethingIsWrongCard />);
                     })()

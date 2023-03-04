@@ -53,7 +53,7 @@ export default function Index() {
                     <button className="button-header blue" onClick={showSignIn}>Sign In</button>
                 </div>
             </div>
-            <OverlayCard visible={overlayVisible} setVisible={setOverlayVisible} content={overlayContent}/>
+            <OverlayCard visible={overlayVisible} setVisible={setOverlayVisible} setContent={setOverlayContent} content={overlayContent}/>
         </div>
     )
 }

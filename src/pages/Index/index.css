@@ -16,11 +16,3 @@ button.icon { background-color: transparent; vertical-align: middle; height: 20p
 button.icon:hover { opacity: 0.4; }
 button.icon > img { height: inherit; }
 .button-header { padding: 0 12px; margin-left: 5px; }
-
-button.border { background: none; border: 1px solid #EBEBEB; color: #626262; }
-button.border:hover { background-color: #f6f6f6; border-color: #ececec; }
-button.border > img { width: 17px; vertical-align: sub; }
-
-.card-divided-2 { display: flex; justify-content: space-between; }
-.card-divided-2 > * { width: 49.5%; }
-.card-divided-2 > button { height: 35px; }
