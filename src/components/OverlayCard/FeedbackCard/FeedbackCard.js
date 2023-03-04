@@ -4,9 +4,9 @@ export default function FeedbackCard() {
     return (
         <div className="card-feedback">
             <div className='card-header'>
-                <div className='card-header-line'></div>
+                <div className='card-header-line' style={{width: '180px'}}></div>
                 <img src={require('../../../assets/images/people.png')} alt="feedback"/>
-                <div className='card-header-line'></div>
+                <div className='card-header-line' style={{width: '180px'}}></div>
             </div>
             <div className='spacer-10'></div>
             <p className='card-title' style={{padding: '15px 0', fontSize: '11pt'}}>Just give me your any feedback about wavetimer!</p>

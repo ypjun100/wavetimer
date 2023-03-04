@@ -12,7 +12,10 @@ button.dark-gray { color: #DEDEDE; background-color: rgba(255, 255, 255, 0.06); 
 button.dark-gray:hover { background-color: rgba(255, 255, 255, 0.08); }
 button.blue { color: #65A3EB; background-color: rgba(39, 138, 255, 0.13); }
 button.blue:hover { background-color: rgba(39, 138, 255, 0.16); }
+button.red { color: #EB6565; background-color: #FFE3E3; }
+button.red:hover { background-color: #fadfdf; }
 button.icon { background-color: transparent; vertical-align: middle; height: 20px; padding: 0; margin-right: 15px; opacity: 0.25; }
 button.icon:hover { opacity: 0.4; }
 button.icon > img { height: inherit; }
+button.full { width: 100%; }
 .button-header { padding: 0 12px; margin-left: 5px; }

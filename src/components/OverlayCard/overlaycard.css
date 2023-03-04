@@ -2,14 +2,14 @@ input, textarea, select { border: 1px solid #DCDCDC; color: #777777; font-size: 
 input:focus, textarea:focus { border-color: #65A3EB; }
 input::placeholder, textarea::placeholder { color: #BABABA; }
 textarea { vertical-align: top; }
-select { font-size: 9pt; width: 100%; }
+select { font-size: 10pt; width: 100%; padding: 8px 10px; }
 
 .overlay-card { background-color: rgba(0, 0, 0, 0.1); position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
 .card { background-color: white; padding: 20px 15px; border-radius: 5px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 .card-header { display: flex; }
 .card-header > img { width: 35px; padding: 0 15px; }
-.card-title { font-size: 13pt; color: #474747; text-align: center; }
-.card-sub-title { font-size: 11pt; color: #868686; text-align: center; }
+.card-title { font-size: 12pt; color: #474747; text-align: center; }
+.card-sub-title { font-size: 10.5pt; color: #b0b0b0; text-align: center; }
 
 button.border { background: none; border: 1px solid #EBEBEB; color: #626262; }
 button.border:hover { background-color: #f6f6f6; border-color: #ececec; }
@@ -19,7 +19,7 @@ button.border > img { width: 17px; vertical-align: sub; }
 .card-divided-2 > * { width: 49.5%; }
 .card-divided-2 > button { height: 35px; }
 
-.card-header-line { width: 170px; height: 1px; background-color: #C9C9C9; margin-top: 10px; }
+.card-header-line { width: 150px; height: 1px; background-color: #C9C9C9; margin-top: 10px; }
 
 .spacer-5 { height: 5px; }
 .spacer-10 { height: 10px; }

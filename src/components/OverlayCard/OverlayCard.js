@@ -5,6 +5,7 @@ import FeedbackCard from './FeedbackCard/FeedbackCard';
 import SomethingIsWrongCard from './SomethingIsWrongCard/SomethingIsWrongCard';
 import SignInCard from './SignInCard/SignInCard';
 import SignUpCard from './SignUpCard/SignUpCard';
+import SettingsCard from './SettingsCard/SettingsCard';
 
 export default function OverlayCard(props) {
     useEffect(() => {
@@ -25,6 +26,8 @@ export default function OverlayCard(props) {
                             return (<SignInCard setContent={props.setContent}/>);
                         } else if(props.content === "SignUpCard") {
                             return (<SignUpCard setContent={props.setContent}/>)
+                        } else if(props.content === "SettingsCard") {
+                            return (<SettingsCard />)
                         }
                         return (<SomethingIsWrongCard />);
                     })()
