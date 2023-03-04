@@ -5,7 +5,7 @@ export default function SomethingIsWrongCard() {
 
     return (
         <div className="card-something-is-wrong">
-            <p className="card-title">You find me!</p>
+            <p className="card-title">You found me!</p>
             <div className="spacer-5"></div>
             <p className="card-sub-title">Here is something mystery place. Refresh the page.</p>
             <div className="spacer-20"></div>

@@ -3,6 +3,7 @@ import './overlaycard.css';
 
 import FeedbackCard from './FeedbackCard/FeedbackCard';
 import SomethingIsWrongCard from './SomethingIsWrongCard/SomethingIsWrongCard';
+import SignInCard from './SignInCard/SignInCard';
 
 export default function OverlayCard(props) {
     useEffect(() => {
@@ -15,8 +16,16 @@ export default function OverlayCard(props) {
     return (
         <div className="overlay-card" style={{display: props.visible ? 'block' : 'none'}}>
             <div className="card">
-                {props.content === "SomethingIsWrongCard" && <SomethingIsWrongCard />}
-                {props.content === "FeedbackCard" && <FeedbackCard />}
+                {
+                    (() => {
+                        if(props.content === "FeedbackCard") {
+                            return (<FeedbackCard />);
+                        } else if(props.content === "SignInCard") {
+                            return (<SignInCard />);
+                        }
+                        return (<SomethingIsWrongCard />);
+                    })()
+                }
             </div>
         </div>
     )

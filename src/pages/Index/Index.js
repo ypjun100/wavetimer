@@ -28,6 +28,12 @@ export default function Index() {
         setOverlayVisible(true);
     }
 
+    // show sign in overlay
+    function showSignIn() {
+        setOverlayContent('SignInCard');
+        setOverlayVisible(true);
+    }
+
     return (
         <div className="index">
             <div className="header">
@@ -39,7 +45,7 @@ export default function Index() {
                     <button className="icon button-header"><img src={require(`../../assets/images/theme-${theme}.png`)} alt="switch theme"/></button>
                     <button className="icon button-header"><img src={require(`../../assets/images/settings-${theme}.png`)} alt="settings"/></button>
                     <button className={"button-header " + theme + "-gray"} onClick={showFeedback}>Feedback</button>
-                    <button className="button-header blue">Sign In</button>
+                    <button className="button-header blue" onClick={showSignIn}>Sign In</button>
                 </div>
             </div>
             <OverlayCard visible={overlayVisible} setVisible={setOverlayVisible} content={overlayContent}/>

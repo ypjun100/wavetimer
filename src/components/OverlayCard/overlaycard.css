@@ -7,8 +7,8 @@ textarea { vertical-align: top; }
 .card { background-color: white; padding: 20px 15px; border-radius: 5px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 .card-header { display: flex; }
 .card-header > img { width: 35px; padding: 0 15px; }
-.card-title { font-size: 11pt; color: #474747; text-align: center; }
-.card-sub-title { font-size: 10pt; color: #868686; text-align: center; }
+.card-title { font-size: 13pt; color: #474747; text-align: center; }
+.card-sub-title { font-size: 11pt; color: #868686; text-align: center; }
 
 .card-header-line { width: 170px; height: 1px; background-color: #C9C9C9; margin-top: 10px; }
 
