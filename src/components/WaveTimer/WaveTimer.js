@@ -56,10 +56,12 @@ export default function WaveTimer() {
 
     // wave user interaction
     window.onmousedown = (e) => {
-      wave.mouseDown(e.clientX);
+      if(document.getElementsByClassName('overlay-card')[0].style.display === 'none')
+        wave.mouseDown(e.clientX);
     };
     window.ontouchstart = (e) => {
-      wave.mouseDown(e.touches[0].clientX);
+      if(document.getElementsByClassName('overlay-card')[0].style.display === 'none')
+        wave.mouseDown(e.touches[0].clientX);
     };
     // render is not execute functually when user focus was lost. 
     document.onvisibilitychange = () => {

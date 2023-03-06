@@ -23,7 +23,7 @@ export default function SettingsCard() {
             <p style={{color: '#A9A9A9', fontSize: '10pt'}}>Break Time</p>
             <div className='spacer-5'></div>
             <select>
-                <option value="None">None</option>
+                <option value="None">Skip</option>
                 <option value="05:00">05:00</option>
                 <option value="10:00">10:00</option>
                 <option value="15:00">15:00</option>
