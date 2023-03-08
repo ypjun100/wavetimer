@@ -7,10 +7,12 @@ import { TimerUIContainer } from '../../utils/timer-ui/timer-ui';
 import { WaveAnimate, WaveAnimateQueue } from '../../utils/wave-animate/wave-animate';
 
 import { setInitialSeconds } from '../../slices/initialSecondsSlice';
+import { setBreakSeconds } from '../../slices/breakSecondsSilce';
 
 export default function WaveTimer() {
   const theme = useSelector((state) => state.theme);
   var initialSeconds = useSelector((state) => state.initialSeconds);
+  var breakSeconds = useSelector((state) => state.breakSeconds);
   const dispatch = useDispatch();
   const _ui = useRef(null);
   const _wave = useRef(null);
@@ -32,8 +34,14 @@ export default function WaveTimer() {
 
     // get saved initialseconds
     if(window.localStorage.getItem('initialSeconds')) {
-      initialSeconds = window.localStorage.getItem('initialSeconds')
+      initialSeconds = parseInt(window.localStorage.getItem('initialSeconds'));
       dispatch(setInitialSeconds(initialSeconds));
+    }
+
+    // get saved break seconds
+    if(window.localStorage.getItem('breakSeconds')) {
+      breakSeconds = parseInt(window.localStorage.getItem('breakSeconds'));
+      dispatch(setBreakSeconds(breakSeconds));
     }
 
     // create ui

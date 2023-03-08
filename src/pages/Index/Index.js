@@ -19,6 +19,7 @@ export default function Index() {
             }
         } else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             dispatch(setDarkTheme());
+            window.localStorage.setItem('theme', 'dark');
         }
     }, []);
 
