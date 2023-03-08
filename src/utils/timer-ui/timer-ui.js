@@ -4,11 +4,12 @@ import FontFaceObserver from 'fontfaceobserver';
 import alarm from '../../assets/sounds/alarm.mp3';
 
 export class TimerUIContainer {
-    constructor(width, height) {
+    constructor(width, height, initialSeconds) {
         this.container = new Container();
         this.timerMode = 'paused';
-        this.initialSeconds = 3600;
+        this.initialSeconds = initialSeconds;
         this.numberOfTimes = 0;
+        this.currentInitialSeconds = this.initialSeconds;
         this.currentSeconds = this.initialSeconds;
         this.alarmSound = new Audio();
         this.alarmSound.autoplay = true;
@@ -90,12 +91,15 @@ export class TimerUIContainer {
     }
 
     rerender() {
-        this.timerText.text = this.secondsToTime(this.currentSeconds);
-        this.numberOfTimesText.text = `${this.numberOfTimes} times`;
-        if(this.timerMode === "paused") {
-            this.startPauseButton.text = "start";
-        } else if(this.timerMode === "started") {
-            this.startPauseButton.text = "pause";
+        if(this.timerText) { // rerender method may be excuted while creating timer-ui, so check status before re-rednering
+            this.timerText.text = this.secondsToTime(this.currentSeconds);
+            this.startTimeText.text = this.secondsToTime(this.currentInitialSeconds);
+            this.numberOfTimesText.text = `${this.numberOfTimes} times`;
+            if(this.timerMode === "paused") {
+                this.startPauseButton.text = "start";
+            } else if(this.timerMode === "started") {
+                this.startPauseButton.text = "pause";
+            }
         }
     }
 
@@ -113,6 +117,16 @@ export class TimerUIContainer {
         this.startPauseButton.position.set(...this.getPosition('right-bottom', width, height));
     }
 
+    setInitialSeconds(initialSeconds) {
+        this.initialSeconds = initialSeconds;
+
+        if(this.timerMode === 'paused' && this.currentSeconds == this.currentInitialSeconds) {
+            this.currentSeconds = this.initialSeconds;
+            this.currentInitialSeconds = this.initialSeconds;
+            this.rerender();
+        }
+    }
+
     // timer event
     timerStartPause() {
         // safari has a constraint that audio must be played by user not automatically. below code is little trick to solve this matter.
@@ -125,6 +139,10 @@ export class TimerUIContainer {
         }
     }
     timerStart() {
+        if(this.currentSeconds == this.currentInitialSeconds) {
+            this.currentInitialSeconds = this.initialSeconds;
+            this.rerender();
+        }
         this.timerMode = "started";
         this.timer = setInterval(this.timerEachSecond.bind(this), 1000);
         this.rerender();
@@ -138,13 +156,14 @@ export class TimerUIContainer {
     }
     timerReset() {
         this.currentSeconds = this.initialSeconds;
+        this.currentInitialSeconds = this.initialSeconds;
         this.timerPause();
         clearInterval(this.timer);
     }
     timerEachSecond() {
         this.currentSeconds -= 1;
         this.timerText.text = this.secondsToTime(this.currentSeconds);
-        this.onTimerEachSecond(this.currentSeconds, this.initialSeconds);
+        this.onTimerEachSecond(this.currentSeconds, this.currentInitialSeconds);
 
         if(this.currentSeconds <= 0) {
             this.numberOfTimes++;
@@ -156,7 +175,7 @@ export class TimerUIContainer {
     }
 
     // user custom event
-    onTimerEachSecond(currentSeconds, initialSeconds) {}
+    onTimerEachSecond(currentSeconds, currentInitialSeconds) {}
     onTimerStarted() {}
     onTimerPaused() {}
     onTimerReset() {}

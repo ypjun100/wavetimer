@@ -7,12 +7,17 @@ import OverlayCard from "../../components/OverlayCard/OverlayCard";
 
 export default function Index() {
     const theme = useSelector((state) => state.theme);
+    const savedTheme = window.localStorage.getItem('theme');
     const [overlayContent, setOverlayContent] = useState('SomethingIsWrongCard');
     const [overlayVisible, setOverlayVisible] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        if(savedTheme) {
+            if(savedTheme == 'dark') {
+                dispatch(setDarkTheme());
+            }
+        } else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             dispatch(setDarkTheme());
         }
     }, []);
@@ -37,6 +42,7 @@ export default function Index() {
     // switch theme
     function switchTheme() {
         dispatch(doSwitchTheme());
+        window.localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
     }
 
     // show settings overlay

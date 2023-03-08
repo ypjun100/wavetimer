@@ -1,15 +1,18 @@
 import React, { useEffect, useRef } from 'react';
 import { Application, Graphics } from 'pixi.js';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { switchTheme } from '../../slices/themeSlice';
 import { WaveManager } from '../../utils/wave/wave-manager';
 import { TimerUIContainer } from '../../utils/timer-ui/timer-ui';
 import { WaveAnimate, WaveAnimateQueue } from '../../utils/wave-animate/wave-animate';
 
+import { setInitialSeconds } from '../../slices/initialSecondsSlice';
+
 export default function WaveTimer() {
   const theme = useSelector((state) => state.theme);
+  var initialSeconds = useSelector((state) => state.initialSeconds);
   const dispatch = useDispatch();
+  const _ui = useRef(null);
   const _wave = useRef(null);
 
   // didMount
@@ -27,14 +30,21 @@ export default function WaveTimer() {
     const graphics = new Graphics();
     app.stage.addChild(graphics);
 
+    // get saved initialseconds
+    if(window.localStorage.getItem('initialSeconds')) {
+      initialSeconds = window.localStorage.getItem('initialSeconds')
+      dispatch(setInitialSeconds(initialSeconds));
+    }
+
     // create ui
-    const ui = new TimerUIContainer(window.innerWidth, window.innerHeight);
+    const ui = new TimerUIContainer(window.innerWidth, window.innerHeight, initialSeconds);
+    _ui.current = ui;
     ui.onTimerStarted = () => {
       wave.startWave();
-      WaveAnimateQueue.enQueue(new WaveAnimate(wave, ui.currentSeconds / ui.initialSeconds, 0.15));
+      WaveAnimateQueue.enQueue(new WaveAnimate(wave, ui.currentSeconds / ui.currentInitialSeconds, 0.15));
     }
     ui.onTimerPaused = () => { wave.stopWave(); }
-    ui.onTimerEachSecond = (currentSeconds, initialSeconds) => { WaveAnimateQueue.enQueue(new WaveAnimate(wave, currentSeconds / initialSeconds, 0.7)); };
+    ui.onTimerEachSecond = (currentSeconds, currentInitialSeconds) => { WaveAnimateQueue.enQueue(new WaveAnimate(wave, currentSeconds / currentInitialSeconds, 0.7)); };
     ui.onTimerFinished = () => { WaveAnimateQueue.enQueue(new WaveAnimate(wave, 1.0, 0.15)); }
     app.stage.addChild(ui.container);
     
@@ -67,18 +77,12 @@ export default function WaveTimer() {
     document.onvisibilitychange = () => {
       WaveAnimateQueue.userFocus = document.visibilityState === "visible" ? true : false;
     }
-
-    // for testing
-    // window.onkeydown = (e) => {
-    //   if(e.key === "1") {
-    //     wave.startWave();
-    //   } else if(e.key === "2") {
-    //     wave.stopWave();
-    //   } else if(e.key === "3") {
-    //     dispatch(switchTheme());
-    //   }
-    // };
   }, []);
+
+  // when initial seconds chagned
+  useEffect(() => {
+    _ui.current.setInitialSeconds(initialSeconds);
+  }, [initialSeconds]);
 
   // when theme state changed
   useEffect(() => {
