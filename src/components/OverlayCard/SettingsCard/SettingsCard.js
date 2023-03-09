@@ -6,7 +6,7 @@ import { setInitialSeconds } from '../../../slices/initialSecondsSlice';
 import { setNumberOfTimes } from '../../../slices/numberOfTimesSlice';
 
 export default function SettingsCard() {
-    const presetStudySeconds = [5, 1800, 2400, 2700, 3000, 3300, 3600];
+    const presetStudySeconds = [1800, 2400, 2700, 3000, 3300, 3600];
     const presetBreakSeconds = [0, 300, 600, 900, 1200];
     const initialSeconds = useSelector((state) => state.initialSeconds);
     const breakSeconds = useSelector((state) => state.breakSeconds);

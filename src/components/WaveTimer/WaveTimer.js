@@ -53,7 +53,7 @@ export default function WaveTimer() {
     }
 
     // create ui
-    const ui = new TimerUIContainer(window.innerWidth, window.innerHeight, initialSeconds);
+    const ui = new TimerUIContainer(window.innerWidth, window.innerHeight, initialSeconds, breakSeconds);
     _ui.current = ui;
     ui.onTimerStarted = () => {
       wave.startWave();
@@ -108,6 +108,11 @@ export default function WaveTimer() {
     _ui.current.setNumberOfTimes(numberOfTimes);
     window.localStorage.setItem('numberOfTimes', numberOfTimes);
   }, [numberOfTimes]);
+
+  // when break seconds changed
+  useEffect(() => {
+    _ui.current.setBreakSeconds(breakSeconds);
+  }, [breakSeconds]);
 
   // when theme state changed
   useEffect(() => {

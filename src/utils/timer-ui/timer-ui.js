@@ -4,13 +4,15 @@ import FontFaceObserver from 'fontfaceobserver';
 import alarm from '../../assets/sounds/alarm.mp3';
 
 export class TimerUIContainer {
-    constructor(width, height, initialSeconds) {
+    constructor(width, height, initialSeconds, breakSeconds) {
         this.container = new Container();
         this.timerMode = 'paused';
+        this.breakMode = false;
         this.initialSeconds = initialSeconds;
         this.numberOfTimes = 0;
         this.currentInitialSeconds = this.initialSeconds;
         this.currentSeconds = this.initialSeconds;
+        this.breakSeconds = breakSeconds;
         this.alarmSound = new Audio();
         this.alarmSound.autoplay = true;
 
@@ -93,7 +95,7 @@ export class TimerUIContainer {
     rerender() {
         if(this.timerText) { // rerender method may be excuted while creating timer-ui, so check status before re-rednering
             this.timerText.text = this.secondsToTime(this.currentSeconds);
-            this.startTimeText.text = this.secondsToTime(this.currentInitialSeconds);
+            this.startTimeText.text = this.breakMode === false ? this.secondsToTime(this.currentInitialSeconds) : 'Break time';
             this.numberOfTimesText.text = `${this.numberOfTimes} times`;
             if(this.timerMode === "paused") {
                 this.startPauseButton.text = "start";
@@ -120,7 +122,7 @@ export class TimerUIContainer {
     setInitialSeconds(initialSeconds) {
         this.initialSeconds = initialSeconds;
 
-        if(this.timerMode === 'paused' && this.currentSeconds == this.currentInitialSeconds) {
+        if(this.timerMode === 'paused' && this.currentSeconds === this.currentInitialSeconds) {
             this.currentSeconds = this.initialSeconds;
             this.currentInitialSeconds = this.initialSeconds;
             this.rerender();
@@ -130,6 +132,10 @@ export class TimerUIContainer {
     setNumberOfTimes(numberOfTimes) {
         this.numberOfTimes = numberOfTimes;
         this.rerender();
+    }
+
+    setBreakSeconds(breakSeconds) {
+        this.breakSeconds = breakSeconds;
     }
 
     // timer event
@@ -144,10 +150,10 @@ export class TimerUIContainer {
         }
     }
     timerStart() {
-        if(this.currentSeconds == this.currentInitialSeconds) {
-            this.currentInitialSeconds = this.initialSeconds;
-            this.rerender();
-        }
+        // if(this.currentSeconds == this.currentInitialSeconds) {
+        //     this.currentInitialSeconds = this.initialSeconds;
+        //     this.rerender();
+        // }
         this.timerMode = "started";
         this.timer = setInterval(this.timerEachSecond.bind(this), 1000);
         this.rerender();
@@ -160,8 +166,13 @@ export class TimerUIContainer {
         clearInterval(this.timer);
     }
     timerReset() {
-        this.currentSeconds = this.initialSeconds;
-        this.currentInitialSeconds = this.initialSeconds;
+        if(this.breakMode === false) {
+            this.currentSeconds = this.initialSeconds;
+            this.currentInitialSeconds = this.initialSeconds;
+        } else {
+            this.currentSeconds = this.breakSeconds;
+            this.currentInitialSeconds = this.breakSeconds;
+        }
         this.timerPause();
         clearInterval(this.timer);
     }
@@ -171,7 +182,12 @@ export class TimerUIContainer {
         this.onTimerEachSecond(this.currentSeconds, this.currentInitialSeconds);
 
         if(this.currentSeconds <= 0) {
-            this.numberOfTimes++;
+            if(this.breakMode === false) {
+                this.breakMode = this.breakSeconds !== 0 ? true : false; // only break seconds is not 'skip', break mode will be activated.
+                this.numberOfTimes++;
+            } else {
+                this.breakMode = false;
+            }
             this.alarmSound.src = alarm;
             this.alarmSound.play();
             this.timerReset();
