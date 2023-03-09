@@ -20,16 +20,18 @@ export default function SettingsCard() {
 
         // Study time
         presetStudySeconds.map((seconds, index) => {
-            if(seconds == initialSeconds) {
+            if(seconds === initialSeconds) {
                 studyTimeSelectOptions.selectedIndex = index;
             }
+            return [];
         });
 
         // Break time
         presetBreakSeconds.map((seconds, index) => {
-            if(seconds == breakSeconds) {
+            if(seconds === breakSeconds) {
                 breakTimeSelectOptions.selectedIndex = index;
             }
+            return [];
         });
     }, []);
 
@@ -77,7 +79,7 @@ export default function SettingsCard() {
             <div className='spacer-5'></div>
             <select id="break-time" onChange={onBreakTimeChanged}>
                 {presetBreakSeconds.map((seconds, index) => {
-                    return (<option key={index} value={seconds != 0 ? secondsToTime(seconds) : 'skip'}>{seconds != 0 ? secondsToTime(seconds) : 'Skip'}</option>)
+                    return (<option key={index} value={seconds !== 0 ? secondsToTime(seconds) : 'skip'}>{seconds !== 0 ? secondsToTime(seconds) : 'Skip'}</option>)
                 })}
             </select>
             <div className='spacer-10'></div>

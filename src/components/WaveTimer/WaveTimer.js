@@ -36,20 +36,17 @@ export default function WaveTimer() {
 
     // get saved initialseconds
     if(window.localStorage.getItem('initialSeconds')) {
-      initialSeconds = parseInt(window.localStorage.getItem('initialSeconds'));
-      dispatch(setInitialSeconds(initialSeconds));
+      dispatch(setInitialSeconds(parseInt(window.localStorage.getItem('initialSeconds'))));
     }
 
     // get saved break seconds
     if(window.localStorage.getItem('breakSeconds')) {
-      breakSeconds = parseInt(window.localStorage.getItem('breakSeconds'));
-      dispatch(setBreakSeconds(breakSeconds));
+      dispatch(setBreakSeconds(parseInt(window.localStorage.getItem('breakSeconds'))));
     }
 
     // get saved number of times
     if(window.localStorage.getItem('numberOfTimes')) {
-      numberOfTimes = parseInt(window.localStorage.getItem('numberOfTimes'));
-      dispatch(setNumberOfTimes(numberOfTimes));
+      dispatch(setNumberOfTimes(parseInt(window.localStorage.getItem('numberOfTimes'))));
     }
 
     // create ui
