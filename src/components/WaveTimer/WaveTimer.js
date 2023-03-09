@@ -8,11 +8,13 @@ import { WaveAnimate, WaveAnimateQueue } from '../../utils/wave-animate/wave-ani
 
 import { setInitialSeconds } from '../../slices/initialSecondsSlice';
 import { setBreakSeconds } from '../../slices/breakSecondsSilce';
+import { setNumberOfTimes } from '../../slices/numberOfTimesSlice';
 
 export default function WaveTimer() {
   const theme = useSelector((state) => state.theme);
   var initialSeconds = useSelector((state) => state.initialSeconds);
   var breakSeconds = useSelector((state) => state.breakSeconds);
+  var numberOfTimes = useSelector((state) => state.numberOfTimes);
   const dispatch = useDispatch();
   const _ui = useRef(null);
   const _wave = useRef(null);
@@ -44,6 +46,12 @@ export default function WaveTimer() {
       dispatch(setBreakSeconds(breakSeconds));
     }
 
+    // get saved number of times
+    if(window.localStorage.getItem('numberOfTimes')) {
+      numberOfTimes = parseInt(window.localStorage.getItem('numberOfTimes'));
+      dispatch(setNumberOfTimes(numberOfTimes));
+    }
+
     // create ui
     const ui = new TimerUIContainer(window.innerWidth, window.innerHeight, initialSeconds);
     _ui.current = ui;
@@ -53,7 +61,10 @@ export default function WaveTimer() {
     }
     ui.onTimerPaused = () => { wave.stopWave(); }
     ui.onTimerEachSecond = (currentSeconds, currentInitialSeconds) => { WaveAnimateQueue.enQueue(new WaveAnimate(wave, currentSeconds / currentInitialSeconds, 0.7)); };
-    ui.onTimerFinished = () => { WaveAnimateQueue.enQueue(new WaveAnimate(wave, 1.0, 0.15)); }
+    ui.onTimerFinished = (numberOfTimes) => {
+      WaveAnimateQueue.enQueue(new WaveAnimate(wave, 0.5, 0.15));
+      dispatch(setNumberOfTimes(numberOfTimes));
+    }
     app.stage.addChild(ui.container);
     
     // create wave graphics
@@ -91,6 +102,12 @@ export default function WaveTimer() {
   useEffect(() => {
     _ui.current.setInitialSeconds(initialSeconds);
   }, [initialSeconds]);
+
+  // when number of times changed
+  useEffect(() => {
+    _ui.current.setNumberOfTimes(numberOfTimes);
+    window.localStorage.setItem('numberOfTimes', numberOfTimes);
+  }, [numberOfTimes]);
 
   // when theme state changed
   useEffect(() => {

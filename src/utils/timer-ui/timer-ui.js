@@ -127,6 +127,11 @@ export class TimerUIContainer {
         }
     }
 
+    setNumberOfTimes(numberOfTimes) {
+        this.numberOfTimes = numberOfTimes;
+        this.rerender();
+    }
+
     // timer event
     timerStartPause() {
         // safari has a constraint that audio must be played by user not automatically. below code is little trick to solve this matter.
@@ -170,7 +175,7 @@ export class TimerUIContainer {
             this.alarmSound.src = alarm;
             this.alarmSound.play();
             this.timerReset();
-            this.onTimerFinished();
+            this.onTimerFinished(this.numberOfTimes);
         }
     }
 
@@ -179,5 +184,5 @@ export class TimerUIContainer {
     onTimerStarted() {}
     onTimerPaused() {}
     onTimerReset() {}
-    onTimerFinished() {}
+    onTimerFinished(numberOfTimes) {}
 }
