@@ -123,8 +123,10 @@ export class WaveManager {
 
         // draw wave
         this.graphics.clear();
-        this.draw(this.backWave, getBackWaveColor(this.theme), ((1 - this.waveHeight) * 0.8 + 0.1) * this.height);
-        this.draw(this.frontWave, getFrontWaveColor(this.theme), ((1 - this.waveHeight) * 0.8 + 0.1) * this.height);
+        const maximumHeight = this.height >= 880 ? 0.8 : this.height >= 500 ? 0.7 : 0.5;
+        const minimumHeight = this.height >= 880 ? 0.1 : this.height >= 500 ? 0.15 : 0.25;
+        this.draw(this.backWave, getBackWaveColor(this.theme), ((1 - this.waveHeight) * maximumHeight + minimumHeight) * this.height);
+        this.draw(this.frontWave, getFrontWaveColor(this.theme), ((1 - this.waveHeight) * maximumHeight + minimumHeight) * this.height);
 
         // update wave gradation position
         this.gradation.style.inset = `${((1 - this.waveHeight) * 0.8 + 0.1) * this.height < this.height / 2 ? this.height / 2 : ((1 - this.waveHeight) * 0.8 + 0.1) * this.height}px 0 0`;

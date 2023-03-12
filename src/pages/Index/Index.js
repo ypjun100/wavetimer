@@ -62,8 +62,8 @@ export default function Index() {
                 <div className="menu">
                     <button className="icon button-header" onClick={switchTheme}><img src={require(`../../assets/images/theme-${theme}.png`)} alt="switch theme"/></button>
                     <button className="icon button-header" onClick={showSettings}><img src={require(`../../assets/images/settings-${theme}.png`)} alt="settings"/></button>
-                    <button className={"button-header " + theme + "-gray"} onClick={showFeedback}>Feedback</button>
-                    <button className="button-header blue" onClick={showSignIn}>Sign In</button>
+                    {/* <button className={"button-header " + theme + "-gray"} onClick={showFeedback}>Feedback</button>
+                    <button className="button-header blue" onClick={showSignIn}>Sign In</button> */}
                 </div>
             </div>
             <OverlayCard visible={overlayVisible} setVisible={setOverlayVisible} setContent={setOverlayContent} content={overlayContent}/>
