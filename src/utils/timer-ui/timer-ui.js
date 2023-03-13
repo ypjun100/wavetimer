@@ -1,5 +1,6 @@
 import { Text, BLEND_MODES, Container } from 'pixi.js';
 import FontFaceObserver from 'fontfaceobserver';
+import NoSleep from 'nosleep.js';
 
 import alarm from '../../assets/sounds/alarm.mp3';
 
@@ -15,6 +16,7 @@ export class TimerUIContainer {
         this.breakSeconds = breakSeconds;
         this.alarmSound = new Audio();
         this.alarmSound.autoplay = true;
+        this.noSleep = new NoSleep(); // for preventing screen off of mobile devices.
 
         var fontN = new FontFaceObserver('JostN'); // normal font
         var fontB = new FontFaceObserver('JostB'); // bold font
@@ -144,8 +146,10 @@ export class TimerUIContainer {
         this.alarmSound.src = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
         this.alarmSound.play();
         if(this.timerMode === "paused") {
+            this.noSleep.enable();
             this.timerStart();
         } else {
+            this.noSleep.disable();
             this.timerPause();
         }
     }

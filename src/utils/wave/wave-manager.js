@@ -19,30 +19,36 @@ export class WaveManager {
         this.lastFrame = 0;
 
         // create background & gradation
+        this.body = this.document.getElementsByTagName('body')[0];
+        this.body.style.cssText = `background: ${this.theme === "light" ? "#FFFFFF" : "#212121"};`;
         this.background = this.document.createElement('div');
         this.background.style.cssText = `background-color: #212121; opacity: ${this.theme === "light" ? "0" : "1"}; position: absolute; inset: 0px; z-index: -2;`;
+        this.document.getElementById(id).after(this.background);
         this.gradation = this.document.createElement('div');
         this.gradation.style.cssText = `background: linear-gradient(0deg, ${this.theme === "light" ? "#64A2EA" : "#224773"}, transparent); position: absolute; z-index: 0; pointer-events: none;`;
-        this.document.getElementById(id).after(this.background);
         this.document.getElementById(id).after(this.gradation);
     }
 
     setLightTheme() {
+        this.body.style.background = "#FFFFFF";
         this.background.style.opacity = 0;
         this.gradation.style.background = "linear-gradient(0deg, #64A2EA, transparent)"
     }
 
     setDarkTheme() {
+        this.body.style.background = "#212121";
         this.background.style.opacity = 1;
         this.gradation.style.background = "linear-gradient(0deg, #224773, transparent)"
     }
 
     switchTheme() {
         if(this.theme === "light") {
+            this.body.style.background = "#212121";
             this.background.style.opacity = 1;
             this.gradation.style.background = "linear-gradient(0deg, #224773, transparent)"
             this.theme = "dark";
         } else if(this.theme === "dark") {
+            this.body.style.background = "#FFFFFF";
             this.background.style.opacity = 0;
             this.gradation.style.background = "linear-gradient(0deg, #64A2EA, transparent)"
             this.theme = "light";
