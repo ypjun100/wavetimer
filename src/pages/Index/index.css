@@ -1,4 +1,4 @@
-.header { height: 30px; padding: 15px 35px; display: flex; justify-content: space-between; }
+.header { height: 30px; padding: 25px 35px; display: flex; justify-content: space-between; }
 .logo { cursor: pointer; }
 .logo > * { display: inline-block; }
 .logo > img { width: 20px; }
