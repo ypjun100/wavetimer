@@ -7,3 +7,5 @@
 > * Wave drawing using Pixi.js Renderer
 > * Animation Queue
 > * Divided Focus time / Breaking time
+
+You can see the detail of developement process in <a href="https://wavetimer.junyoung.dev">here</a> in korean.
