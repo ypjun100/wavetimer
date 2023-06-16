@@ -8,4 +8,4 @@
 > * Animation Queue
 > * Divided Focus time / Breaking time
 
-You can see the detail of developement process in <a href="https://wavetimer.junyoung.dev">here</a> in korean.
+You can see the detail of developement process in <a href="https://blog.junyoung.dev/posts/wavetimer-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0/">here</a> in korean.
